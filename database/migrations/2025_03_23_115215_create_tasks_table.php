@@ -13,7 +13,7 @@ return new class extends Migration
             $table->string('name');
             $table->integer('lenght')->default(0);
             $table->boolean('finished')->default(false);
-            $table->string('assignes')->default('');
+            $table->string('assignes')->default('[]');
             $table->enum('priority', ['alacsony', 'normal', 'magas'])->default('normal');
             $table->date('schedule_date')->nullable();
             $table->timestamps();

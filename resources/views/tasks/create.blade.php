@@ -8,15 +8,6 @@
                 <div class="card-header">Új feladat létrehozása</div>
 
                 <div class="card-body">
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
                     <form method="POST" action="{{ route('tasks.store') }}">
                         @csrf
 
@@ -32,9 +23,6 @@
                             <label for="schedule_date" class="form-label">Ütemezett nap <span class="text-danger">*</span></label>
                             <input type="date" class="form-control @error('schedule_date') is-invalid @enderror" id="schedule_date" name="schedule_date" value="{{ old('schedule_date') }}" required>
                             <small class="form-text text-muted">Csak hétköznap (H-P) adható meg.</small>
-{{--                             @error('schedule_date')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror --}}
                         </div>
 
                         <div class="mb-3">
@@ -93,15 +81,42 @@
     </div>
 </div>
 
-<script>
-    // Validate date is a weekday
-    document.getElementById('schedule_date').addEventListener('change', function() {
-        const date = new Date(this.value);
-        const day = date.getDay();
-        if (day === 0 || day === 6) { // 0 = Sunday, 6 = Saturday
-            alert('Csak hétköznap (hétfő-péntek) választható!');
-            this.value = '';
-        }
-    });
-</script>
+<!-- Bootstrap Error Modal - IDE kerül -->
+<div class="modal fade" id="errorModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">Hiba</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                @if ($errors->any())
+                    <ul class="list-unstyled">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                @endif
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Feladat felbontása</button>
+                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Beszúrás mégis</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mégse</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript a modal megnyitásához -->
+@if ($errors->any())
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+            errorModal.show();
+        });
+    </script>
+@endif
+
+<script src="{{ resource_path('js/weekdayValidation.js') }}"></script>
+
 @endsection

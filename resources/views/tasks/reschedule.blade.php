@@ -44,17 +44,7 @@
         </div>
     </div>
 </div>
-@endsection
 
-@section('scripts')
-<script>
-    document.getElementById('schedule_date').addEventListener('change', function() {
-        const date = new Date(this.value);
-        const day = date.getDay();
-        if (day === 0 || day === 6) { // 0 = Sunday, 6 = Saturday
-            alert('Csak hétköznap (hétfő-péntek) választható!');
-            this.value = '';
-        }
-    });
-</script>
+<script src="{{ resource_path('js/weekdayValidation.js') }}"></script>
+
 @endsection

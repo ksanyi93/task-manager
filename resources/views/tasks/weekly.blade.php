@@ -70,17 +70,7 @@
         </div>
     </div>
 </div>
-@endsection
 
-@section('styles')
-<style>
-    .task-card {
-        background-color: #fff;
-        transition: all 0.2s ease;
-    }
-    .task-card:hover {
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        transform: translateY(-2px);
-    }
-</style>
+<link rel="stylesheet" href="{{ resource_path('css/weeklyColor.css') }}">
+
 @endsection

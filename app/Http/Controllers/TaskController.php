@@ -219,9 +219,9 @@ class TaskController extends Controller
     
                 // 8 óra (480 perc) feletti munkaidő esetén hiba
                 if ($totalMinutes > 480) {
-                    $assignees = implode(',', $assignees);
+                    //$assignees = implode(',', $assignees);
                     return redirect()->route('tasks.index')
-                        ->with('error', "A(z) $assignees megbízott az adott napon már nem tud több munkát vállalni (8 óra / 480 perc feletti munkaidő).");
+                        ->with('error', "A(z) $assignee megbízott az adott napon már nem tud több munkát vállalni (8 óra / 480 perc feletti munkaidő).");
                 }
             }
         }
