@@ -7,10 +7,10 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <span>Feladatok heti nézete: {{ $currentDate->format('Y. F') }}</span>
-                    <div>
-                        <a href="{{ route('tasks.index') }}" class="btn btn-sm btn-secondary me-2">Vissza a listához</a>
-                        <a href="{{ route('tasks.create') }}" class="btn btn-sm btn-primary">Új feladat</a>
-                    </div>
+                        <div>
+                            <a href="{{ route('tasks.index') }}" class="btn btn-sm btn-secondary me-2">Vissza a listához</a>
+                            <a href="{{ route('tasks.create') }}" class="btn btn-sm btn-primary">Új feladat</a>
+                        </div>
                 </div>
 
                 <div class="card-body">
@@ -20,7 +20,6 @@
                         </div>
                     @endif
 
-                    <!-- Navigációs gombok -->
                     <div class="d-flex justify-content-between mb-4">
                         <a href="{{ route('tasks.weekly.date', $prevWeek) }}" class="btn btn-outline-primary">
                             <i class="bi bi-arrow-left"></i> Előző hét
@@ -30,7 +29,6 @@
                         </a>
                     </div>
 
-                    <!-- Heti nézet -->
                     <div class="row">
                         @foreach ($weekDays as $day)
                             @php
@@ -71,6 +69,6 @@
     </div>
 </div>
 
-<link rel="stylesheet" href="{{ resource_path('css/weeklyColor.css') }}">
+<link rel="stylesheet" href="{{ asset('css/weeklyColor.css') }}">
 
 @endsection

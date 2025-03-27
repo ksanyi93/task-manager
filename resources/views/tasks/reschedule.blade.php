@@ -45,6 +45,6 @@
     </div>
 </div>
 
-<script src="{{ resource_path('js/weekdayValidation.js') }}"></script>
+<script src="{{ asset('js/weekdayValidation.js') }}"></script>
 
 @endsection

@@ -7,8 +7,10 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <span>Feladatok listája</span>
-                    <a href="{{ route('tasks.weekly') }}" class="btn btn-sm btn-secondary me-2">Heti nézet</a>
-                    <a href="{{ route('tasks.create') }}" class="btn btn-sm btn-primary">Új feladat</a>
+                        <div>
+                            <a href="{{ route('tasks.weekly') }}" class="btn btn-sm btn-secondary me-2">Heti nézet</a>
+                            <a href="{{ route('tasks.create') }}" class="btn btn-sm btn-primary">Új feladat</a>
+                        </div>
                 </div>
 
                 <div class="card-body">
@@ -68,14 +70,14 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <div class="btn-group" role="group">
-                                            <a href="{{ route('tasks.edit', $task) }}" class="btn btn-sm btn-warning">Szerkesztés</a>
-                                            <a href="{{ route('tasks.reschedule', $task) }}" class="btn btn-sm btn-info">Átütemezés</a>
-                                            <a href="{{ route('tasks.duplicate', $task) }}" class="btn btn-sm btn-success">Feladat duplikálása</a>
-                                            <form action="{{ route('tasks.destroy', $task) }}" method="POST" class="d-inline">
+                                        <div class="btn-group d-flex gap-1" role="group">
+                                            <a href="{{ route('tasks.edit', $task) }}" class="btn btn-sm btn-warning flex-fill">Szerkesztés</a>
+                                            <a href="{{ route('tasks.reschedule', $task) }}" class="btn btn-sm btn-info flex-fill">Átütemezés</a>
+                                            <a href="{{ route('tasks.duplicate', $task) }}" class="btn btn-sm btn-success flex-fill">Feladat duplikálása</a>
+                                            <form action="{{ route('tasks.destroy', $task) }}" method="POST" class="flex-fill">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Biztosan törölni szeretnéd?')">Törlés</button>
+                                                <button type="submit" class="btn btn-sm btn-danger w-100" onclick="return confirm('Biztosan törölni szeretnéd?')">Törlés</button>
                                             </form>
                                         </div>
                                     </td>
