@@ -76,7 +76,7 @@ class TaskController extends Controller
         ], $validated);
 
         if (is_array($normalized['assignes'])) {
-            $normalized['assignes'] = implode(',', $normalized);
+            $normalized['assignes'] = implode(',', $normalized['assignes']);
         }
 
         return $normalized;
@@ -153,7 +153,7 @@ class TaskController extends Controller
 
         $request = request()->replace([
             'schedule_date' => $task->schedule_date,
-            'assignes' => explode(',', $task->assignes),
+            'assignes' => $task->assignes,
             'lenght' => $task->lenght
         ]);
 
@@ -177,7 +177,7 @@ class TaskController extends Controller
     public function weekly($date = null)
     {
         $weekDays = [];
-        $currentDate = Carbon::now();
+        $currentDate = !is_null($date) ? Carbon::parse($date) : Carbon::now();
         $weekStart = $currentDate->copy()->startOfWeek();
         $weekEnd = $weekStart->copy()->addDays(4);
 
