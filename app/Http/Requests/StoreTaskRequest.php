@@ -18,9 +18,9 @@ class StoreTaskRequest extends FormRequest
     {
         return [
             'schedule_date' => 'required|date',
-            'assignes' => 'nullable|array', // Most már opcionális tömb
-            'assignes.*' => 'string', // Minden elem string legyen
-            'lenght' => 'nullable|integer|min:0' // Átneveztem duration-ról lenght-re a korábban mutatott modell alapján
+            'assignes' => 'nullable|array',
+            'assignes.*' => 'string',
+            'lenght' => 'nullable|integer|min:0'
         ];
     }
     
@@ -28,19 +28,17 @@ class StoreTaskRequest extends FormRequest
     {
         $validator->after(function ($validator) {
             $scheduleDate = $this->input('schedule_date');
-            $assignees = $this->input('assignes') ?? []; // Alapértelmezetten üres tömb
+            $assignees = $this->input('assignes') ?? [];
             $lenght = $this->input('lenght') ?? 0;
     
             foreach ($assignees as $assignee) {
-                // Összes létező feladat lekérdezése, ahol a string assignes mezőben benne van a felhasználó
                 $existingMinutes = Task::where('schedule_date', $scheduleDate)
                     ->where('assignes', 'LIKE', '%' . $assignee . '%')
                     ->sum('lenght');
     
-                // Az új feladattal együtt mennyi lesz
                 $totalMinutes = $existingMinutes + $lenght;
     
-                if ($totalMinutes > 480) { // 8 óra = 480 perc
+                if ($totalMinutes > 480) {
                     $validator->errors()->add(
                         'assignes',
                         'A kiválasztott megbízott (' . $assignee . ') az adott napon (' . $scheduleDate . ') már nem tud több munkát vállalni, mert elérné a 8 órás limitet.'

@@ -15,8 +15,6 @@
                 @endif
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Feladat felbontása</button>
-                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Beszúrás mégis</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bezár</button>
             </div>
         </div>
